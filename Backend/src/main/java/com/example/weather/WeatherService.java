@@ -17,15 +17,19 @@ public class WeatherService {
     }
 
     public WeatherDTO getCurrentWeather(String city){
-        return client.getCurrentWeather(city);
+        try {
+            return client.getCurrentWeather(city);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     public TempDTO getCurrentTemp(String city){
         try {
-        return client.getCurrentTemp(city);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
-    }
+            return client.getCurrentTemp(city);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
      public WeeklyDTO getWeekForecast(String city){

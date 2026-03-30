@@ -7,6 +7,14 @@ public class WeatherDTO {
     private int humidity;       // %
     private double windSpeed;   // m/s
 
+    public WeatherDTO(String city, String condition, double temperature, int humidity, double windSpeed){
+        this.city = city;
+        this.condition = condition;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
+    }
+
     public String getCity() {
         return city;
     }

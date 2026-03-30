@@ -26,7 +26,26 @@ public class WeatherClient {
     private final OkHttpClient client = new OkHttpClient();
 
     public WeatherDTO getCurrentWeather(String city) throws IOException{
+        Request request = new Request.Builder()
+                .url(base_url + "data/2.5/weather?q=" + city + "&appid=" + api_key + "&units=metric")
+                .get()
+                .build();
 
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.body().string());
+            double temp = root.get("main").get("temp").asDouble();
+            String condition = root.get("weather").get(0).get("main").asText();
+            int humidity = root.get("main").get("humidity").asInt();
+            double windSpeed = root.get("wind").get("speed").asDouble();
+
+
+            return new WeatherDTO(city, condition, temp, humidity, windSpeed);
+        }
     }
     
     public TempDTO getCurrentTemp(String city) throws IOException {
