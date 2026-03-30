@@ -40,11 +40,38 @@ public class WeeklyDTO {
     private double day6MaxTemp;
     private String day6Condition;
 
-    // Tag 7
-    private String day7Date;
-    private double day7MinTemp;
-    private double day7MaxTemp;
-    private String day7Condition;
+    public WeeklyDTO(String city, String day1Date, double day1MinTemp, double day1MaxTemp, String day1Condition,
+                     String day2Date, double day2MinTemp, double day2MaxTemp, String day2Condition,
+                     String day3Date, double day3MinTemp, double day3MaxTemp, String day3Condition,
+                     String day4Date, double day4MinTemp, double day4MaxTemp, String day4Condition,
+                     String day5Date, double day5MinTemp, double day5MaxTemp, String day5Condition,
+                     String day6Date, double day6MinTemp, double day6MaxTemp, String day6Condition) {
+        this.city = city;
+        this.day1Date = day1Date;
+        this.day1MinTemp = day1MinTemp;
+        this.day1MaxTemp = day1MaxTemp;
+        this.day1Condition = day1Condition;
+        this.day2Date = day2Date;
+        this.day2MinTemp = day2MinTemp;
+        this.day2MaxTemp = day2MaxTemp;
+        this.day2Condition = day2Condition;
+        this.day3Date = day3Date;
+        this.day3MinTemp = day3MinTemp;
+        this.day3MaxTemp = day3MaxTemp;
+        this.day3Condition = day3Condition;
+        this.day4Date = day4Date;
+        this.day4MinTemp = day4MinTemp;
+        this.day4MaxTemp = day4MaxTemp;
+        this.day4Condition = day4Condition;
+        this.day5Date = day5Date;
+        this.day5MinTemp = day5MinTemp;
+        this.day5MaxTemp = day5MaxTemp;
+        this.day5Condition = day5Condition;
+        this.day6Date = day6Date;
+        this.day6MinTemp = day6MinTemp;
+        this.day6MaxTemp = day6MaxTemp;
+        this.day6Condition = day6Condition;
+    }
 
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
@@ -102,14 +129,4 @@ public class WeeklyDTO {
     public void setDay6MaxTemp(double day6MaxTemp) { this.day6MaxTemp = day6MaxTemp; }
     public String getDay6Condition() { return day6Condition; }
     public void setDay6Condition(String day6Condition) { this.day6Condition = day6Condition; }
-
-    public String getDay7Date() { return day7Date; }
-    public void setDay7Date(String day7Date) { this.day7Date = day7Date; }
-    public double getDay7MinTemp() { return day7MinTemp; }
-    public void setDay7MinTemp(double day7MinTemp) { this.day7MinTemp = day7MinTemp; }
-    public double getDay7MaxTemp() { return day7MaxTemp; }
-    public void setDay7MaxTemp(double day7MaxTemp) { this.day7MaxTemp = day7MaxTemp; }
-    public String getDay7Condition() { return day7Condition; }
-    public void setDay7Condition(String day7Condition) { this.day7Condition = day7Condition; }
-
 }

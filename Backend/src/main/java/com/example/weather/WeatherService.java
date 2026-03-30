@@ -33,7 +33,11 @@ public class WeatherService {
     }
 
      public WeeklyDTO getWeekForecast(String city){
-        return client.getWeekForecast(city);
+        try {
+            return client.getWeekForecast(city);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
