@@ -27,7 +27,7 @@ public class WeatherController {
     public TempDTO getCurrentTemp(@PathVariable String city){
         return service.getCurrentTemp(city);
     }
-
+    
     @GetMapping("weekly/{city}")
     public WeeklyDTO getWeekForecast(@PathVariable String city){
         return service.getWeekForecast(city);

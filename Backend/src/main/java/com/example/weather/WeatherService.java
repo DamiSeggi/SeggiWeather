@@ -1,5 +1,7 @@
 package com.example.weather;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import com.example.weather.DTO.TempDTO;
@@ -17,9 +19,13 @@ public class WeatherService {
     public WeatherDTO getCurrentWeather(String city){
         return client.getCurrentWeather(city);
     }
-
+    
     public TempDTO getCurrentTemp(String city){
+        try {
         return client.getCurrentTemp(city);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
     }
 
      public WeeklyDTO getWeekForecast(String city){

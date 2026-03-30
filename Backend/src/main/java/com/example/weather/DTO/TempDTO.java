@@ -4,6 +4,11 @@ public class TempDTO {
     private String city;
     private double temp;
 
+    public TempDTO(String city, double temp){
+        this.city = city;
+        this.temp = temp;
+    }
+
     public String getCity(){
         return city;
     }
