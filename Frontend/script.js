@@ -1,0 +1,42 @@
+// script.js -> API connection to Wrapper-Backend 
+
+const api = "http://localhost:8080/api/v1/";
+            
+function getLocationWeatherData(){
+    let input = document.getElementById("input").value;
+    
+    // Current weather
+    fetch(api + "current/weather/" + input)
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById("currentTemp").innerHTML = "Temperatur: " + Math.round(data.temperature) + "°C";
+            document.getElementById("currentCondition").innerHTML = "Condition: " + data.condition;
+            
+            document.getElementById("humidity").innerHTML = "Humidity: " + data.humidity + "%";
+            document.getElementById("windSpeed").innerHTML = "Wind Speed: " + data.windSpeed + " m/s";
+            document.getElementById("condition").innerHTML = "Condition: " + data.condition;
+        })
+        .catch(err => console.log("Error fetching weather:", err));
+    
+    // Weekly forecast
+    fetch(api + "weekly/" + input)
+        .then(r => r.json())
+        .then(data => {
+            for (let i = 1; i <= 6; i++) {
+                let dateKey = "day" + i + "Date";
+                let minKey = "day" + i + "MinTemp";
+                let maxKey = "day" + i + "MaxTemp";
+                let condKey = "day" + i + "Condition";
+                
+                let date = data[dateKey];
+                let minTemp = Math.round(data[minKey]);
+                let maxTemp = Math.round(data[maxKey]);
+                let condition = data[condKey];
+                
+                document.getElementById("day" + i).innerHTML = 
+                    date + " - Min: " + minTemp + "°C, Max: " + maxTemp + "°C, " + condition;
+            }
+        })
+        .catch(err => console.log("Error fetching forecast:", err));
+}
+
