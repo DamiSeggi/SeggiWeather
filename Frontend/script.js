@@ -4,13 +4,22 @@ const api = "http://localhost:8080/api/v1/";
             
 function getLocationWeatherData(){
     let input = document.getElementById("input").value;
+    let error = document.getElementById("error");
+    error.style.display = "none";
     let display = document.getElementById("weatherBox");
-    display.style.display = "block";
+    display.style.display = "none";
 
     // Current weather
     fetch(api + "current/weather/" + input)
-        .then(r => r.json())
+        .then(r => {
+            if(!r.ok){
+                error.style.display ="block";
+                throw new Error("City not found");
+            }
+            return r.json();
+        })
         .then(data => {
+            display.style.display = "block";
             document.getElementById("currentTemp").innerHTML = "Temperatur: " + Math.round(data.temperature) + "°C";
             document.getElementById("currentCondition").innerHTML = "Condition: " + data.condition;
             
