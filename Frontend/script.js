@@ -4,7 +4,9 @@ const api = "http://localhost:8080/api/v1/";
             
 function getLocationWeatherData(){
     let input = document.getElementById("input").value;
-    
+    let display = document.getElementById("weatherBox");
+    display.style.display = "block";
+
     // Current weather
     fetch(api + "current/weather/" + input)
         .then(r => r.json())
