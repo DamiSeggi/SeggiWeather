@@ -20,7 +20,7 @@ function getLocationWeatherData(){
         })
         .then(data => {
             display.style.display = "block";
-            document.getElementById("currentTemp").innerHTML = "Temperatur: " + Math.round(data.temperature) + "°C";
+            document.getElementById("currentTemp").innerHTML = Math.round(data.temperature) + "°C";
             document.getElementById("currentCondition").innerHTML = "Condition: " + data.condition;
             
             document.getElementById("humidity").innerHTML = "Humidity: " + data.humidity + "%";
@@ -45,7 +45,7 @@ function getLocationWeatherData(){
                 let condition = data[condKey];
                 
                 document.getElementById("day" + i).innerHTML = 
-                    date + " - Min: " + minTemp + "°C, Max: " + maxTemp + "°C, " + condition;
+                    date + " </br> Min: " + minTemp + "°C, Max: " + maxTemp + "°C </br>" + condition;
             }
         })
         .catch(err => console.log("Error fetching forecast:", err));

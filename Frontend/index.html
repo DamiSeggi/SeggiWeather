@@ -1,35 +1,49 @@
-<html>
-    <header>
-        <title>SeggiWeather</title>
-    </header>
-    <body>
-        <input id="input" type="text" placeholder="Enter city">
-        <button onclick="getLocationWeatherData()">zeigen</button>
-        <br><br>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>SeggiWeather</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-section">
+            <input id="input" type="text" placeholder="Enter city">
+            <button onclick="getLocationWeatherData()">zeigen</button>
+        </div>
 
         <h1 id="error" style="display: none;">No city found</h1>
 
-            <div id="weatherBox" style="display: none;">
-            <h2>Aktuelle Temperatur</h2>
-            <div id="currentTemp"></div>
-            <div id="currentCondition"></div>
-            <br><br>
+        <div id="weatherBox" style="display: none;">
+            <div class="weather-section">
+                <h2>Aktuelle Temperatur</h2>
+                <div id="currentTemp"></div>
+                <div id="currentCondition"></div>
+            </div>
 
-            <h2>Vorhersage</h2>
-            <div id="day1"></div>
-            <div id="day2"></div>
-            <div id="day3"></div>
-            <div id="day4"></div>
-            <div id="day5"></div>
-            <div id="day6"></div>
-            <br><br>
+            <div class="weather-section">
+                <h2>Vorhersage</h2>
+                <div class="forecast-grid">
+                    <div id="day1"></div>
+                    <div id="day2"></div>
+                    <div id="day3"></div>
+                    <div id="day4"></div>
+                    <div id="day5"></div>
+                    <div id="day6"></div>
+                </div>
+            </div>
 
-            <h2>Heutige Details</h2>
-            <div id="humidity"></div>
-            <div id="windSpeed"></div>
-            <div id="condition"></div>
+            <div class="weather-section">
+                <h2>Heutige Details</h2>
+                <div class="details-grid">
+                    <div id="humidity"></div>
+                    <div id="windSpeed"></div>
+                    <div id="condition"></div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <script src="script.js"></script>
-    </body>
+    <script src="script.js"></script>
+</body>
 </html>
