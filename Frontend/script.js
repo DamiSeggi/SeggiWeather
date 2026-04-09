@@ -1,7 +1,7 @@
 // script.js -> API connection to Wrapper-Backend 
 
 const api = "http://localhost:8080/api/v1/";
-            
+
 function getLocationWeatherData(){
     let input = document.getElementById("input").value;
     let error = document.getElementById("error");
@@ -21,7 +21,7 @@ function getLocationWeatherData(){
         .then(data => {
             display.style.display = "block";
             document.getElementById("currentTemp").innerHTML = Math.round(data.temperature) + "°C";
-            document.getElementById("currentCondition").innerHTML = "Condition: " + data.condition;
+            document.getElementById("conditionIcon").innerHTML = getConditionIcon(data.condition);
             
             document.getElementById("humidity").innerHTML = "Humidity: " + data.humidity + "%";
             document.getElementById("windSpeed").innerHTML = "Wind Speed: " + data.windSpeed + " m/s";
@@ -51,3 +51,33 @@ function getLocationWeatherData(){
         .catch(err => console.log("Error fetching forecast:", err));
 }
 
+// Icons, for display of the current weather
+conditionIcons = {
+    thunderstorm: '⛈️',
+    drizzle: '🌦️',
+    rain: '🌧️',
+    snow: '❄️',
+    clear: '☀️',
+    clouds: '☁️',
+    mist: '🌫️',
+    smoke: '💨',
+    haze: '🌫️',
+    dust: '🌪️',
+    fog: '🌫️',
+    sand: '🌪️',
+    ash: '💨',
+    squall: '💨',
+    tornado: '🌪️'
+};
+
+function getConditionIcon(condition){
+    const key = condition.toLowerCase();
+    return conditionIcons[key]
+}
+
+// "Enter" -> Display weather data from location
+document.addEventListener("keypress", function(event) {
+    if(event.key === "Enter") {
+        getLocationWeatherData();
+    }
+});
