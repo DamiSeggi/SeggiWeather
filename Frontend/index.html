@@ -9,20 +9,20 @@
     <div class="container">
         <div class="search-section">
             <input id="input" type="text" placeholder="Enter city">
-            <button onclick="getLocationWeatherData()">zeigen</button>
+            <button onclick="getLocationWeatherData()">show</button>
         </div>
 
         <h1 id="error" style="display: none;">No city found</h1>
 
         <div id="weatherBox" style="display: none;">
             <div class="weather-section">
-                <h2>Aktuelle Temperatur</h2>
+                <h2>Current Weather</h2>
                 <div id="currentTemp"></div>
                 <div id="conditionIcon"></div>
             </div>
 
             <div class="weather-section">
-                <h2>Vorhersage</h2>
+                <h2>Forecast</h2>
                 <div class="forecast-grid">
                     <div id="day1"></div>
                     <div id="day2"></div>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="weather-section">
-                <h2>Heutige Details</h2>
+                <h2>Details</h2>
                 <div class="details-grid">
                     <div id="humidity"></div>
                     <div id="windSpeed"></div>
