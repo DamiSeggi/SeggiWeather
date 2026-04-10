@@ -11,10 +11,7 @@ import com.example.weather.DTO.WeatherDTO;
 import com.example.weather.DTO.WeeklyDTO;
 
 @RestController
-@CrossOrigin(originPatterns = {
-    "http://localhost:*",
-    "http://127.0.0.1:*"
-})
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/")
 public class WeatherController {
     private WeatherService service;
