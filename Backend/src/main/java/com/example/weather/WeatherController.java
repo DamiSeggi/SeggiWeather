@@ -10,6 +10,11 @@ import com.example.weather.DTO.TempDTO;
 import com.example.weather.DTO.WeatherDTO;
 import com.example.weather.DTO.WeeklyDTO;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Weather", description = "Endpoints for retrieving current and forecasted weather data")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/")
@@ -20,18 +25,21 @@ public class WeatherController {
         this.service = service;
     }
 
+    @Operation(summary = "Get current weather conditions for a city")
     @GetMapping("current/weather/{city}")
-    public WeatherDTO getCurrentWeather(@PathVariable String city){
+    public WeatherDTO getCurrentWeather(@Parameter(description = "City name") @PathVariable String city){
         return service.getCurrentWeather(city);
     }
 
+    @Operation(summary = "Get current temperature for a city")
     @GetMapping("current/temp/{city}")
-    public TempDTO getCurrentTemp(@PathVariable String city){
+    public TempDTO getCurrentTemp(@Parameter(description = "City name") @PathVariable String city){
         return service.getCurrentTemp(city);
     }
     
+    @Operation(summary = "Get weekly weather forecast for a city")
     @GetMapping("weekly/{city}")
-    public WeeklyDTO getWeekForecast(@PathVariable String city){
+    public WeeklyDTO getWeekForecast(@Parameter(description = "City name") @PathVariable String city){
         return service.getWeekForecast(city);
     }
 }
