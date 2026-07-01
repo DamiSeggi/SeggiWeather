@@ -72,6 +72,7 @@ docker-compose up --build
 
 - Backend runs on `http://localhost:8080`
 - Frontend runs on `http://localhost:3000`
+- Swagger UI available at `http://localhost:8080/swagger-ui/index.html`
 
 
 ## What I got better at / What I learned
