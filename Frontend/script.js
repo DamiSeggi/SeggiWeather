@@ -33,20 +33,16 @@ function getLocationWeatherData(){
     fetch(api + "weekly/" + input)
         .then(r => r.json())
         .then(data => {
-            for (let i = 1; i <= 6; i++) {
-                let dateKey = "day" + i + "Date";
-                let minKey = "day" + i + "MinTemp";
-                let maxKey = "day" + i + "MaxTemp";
-                let condKey = "day" + i + "Condition";
-                
-                let date = data[dateKey];
-                let minTemp = Math.round(data[minKey]);
-                let maxTemp = Math.round(data[maxKey]);
-                let condition = data[condKey];
-                
-                document.getElementById("day" + i).innerHTML = 
-                    date + " </br> Min: " + minTemp + "°C, Max: " + maxTemp + "°C </br>" + condition;
-            }
+
+            data.forecast.forEach((day, index) => {
+
+                document.getElementById("day" + (index + 1)).innerHTML =
+                    day.date +
+                    " <br> Min: " + Math.round(day.minTemp) +
+                    "°C, Max: " + Math.round(day.maxTemp) +
+                    "°C <br>" + day.condition;
+            });
+
         })
         .catch(err => console.log("Error fetching forecast:", err));
 }

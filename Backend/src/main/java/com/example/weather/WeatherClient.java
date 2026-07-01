@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.weather.DTO.TempDTO;
 import com.example.weather.DTO.WeatherDTO;
+import com.example.weather.DTO.DailyDTO;
 import com.example.weather.DTO.WeeklyDTO;
 
 import okhttp3.OkHttpClient;
@@ -89,7 +89,7 @@ public class WeatherClient {
         JsonNode root = mapper.readTree(response.body().string());
         JsonNode list = root.get("list");
 
-        Map<String, Map<String, Object>> daysMap = new TreeMap<>();
+        Map<String, DailyDTO> daysMap = new TreeMap<>();
 
         for (JsonNode forecast : list) {
             long dt = forecast.get("dt").asLong();
@@ -102,32 +102,25 @@ public class WeatherClient {
             String condition = forecast.get("weather").get(0).get("main").asText();
 
             if (!daysMap.containsKey(dateStr)) {
-                Map<String, Object> dayData = new HashMap<>();
-                dayData.put("date", dateStr);
-                dayData.put("minTemp", tempMin);
-                dayData.put("maxTemp", tempMax);
-                dayData.put("condition", condition);
-                daysMap.put(dateStr, dayData);
+                daysMap.put(
+                    dateStr,
+                    new DailyDTO(dateStr, tempMin, tempMax, condition)
+                );
             } else {
-                Map<String, Object> dayData = daysMap.get(dateStr);
-                dayData.put("minTemp", Math.min((double) dayData.get("minTemp"), tempMin));
-                dayData.put("maxTemp", Math.max((double) dayData.get("maxTemp"), tempMax));
+                DailyDTO existing = daysMap.get(dateStr);
+                daysMap.put(
+                    dateStr,
+                    new DailyDTO(
+                        dateStr, Math.min(existing.getMinTemp(), tempMin),
+                        Math.max(existing.getMaxTemp(), tempMax),
+                        existing.getCondition()
+                    )
+                );
             }
         }
 
-        List<Map<String, Object>> days = new ArrayList<>(daysMap.values());
-
-        WeeklyDTO weekly = new WeeklyDTO(
-            city,
-            (String) days.get(0).get("date"), (double) days.get(0).get("minTemp"), (double) days.get(0).get("maxTemp"), (String) days.get(0).get("condition"),
-            (String) days.get(1).get("date"), (double) days.get(1).get("minTemp"), (double) days.get(1).get("maxTemp"), (String) days.get(1).get("condition"),
-            (String) days.get(2).get("date"), (double) days.get(2).get("minTemp"), (double) days.get(2).get("maxTemp"), (String) days.get(2).get("condition"),
-            (String) days.get(3).get("date"), (double) days.get(3).get("minTemp"), (double) days.get(3).get("maxTemp"), (String) days.get(3).get("condition"),
-            (String) days.get(4).get("date"), (double) days.get(4).get("minTemp"), (double) days.get(4).get("maxTemp"), (String) days.get(4).get("condition"),
-            (String) days.get(5).get("date"), (double) days.get(5).get("minTemp"), (double) days.get(5).get("maxTemp"), (String) days.get(5).get("condition")
-        );
-
-        return weekly;
+        List<DailyDTO> days = new ArrayList<>(daysMap.values());
+        return new WeeklyDTO(city, days);
     }
 }
 }
