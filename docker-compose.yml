@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   backend:
     build:
@@ -7,8 +5,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    environment:
-      WEATHER_API_KEY: ${WEATHER_API_KEY}
     env_file:
       - .env
     restart: unless-stopped
